@@ -1,25 +1,25 @@
 # AGENTS.md
 
-本文件适用于 Marian 个人网站的整个仓库。[PRODUCT.md](PRODUCT.md) 记录现有站点的内容和功能，[DESIGN.md](DESIGN.md) 用于记录改版方案。
+This file applies to the entire repository for Marian's personal website. [PRODUCT.md](PRODUCT.md) describes the current site's content and features. [design.md](design.md) is the primary visual design specification. [design-exploration.md](design-exploration.md) records the earlier design candidates and decisions.
 
-## 分支与交付
+## Branches and Delivery
 
-- 将改版探索放在 `design-exploration`，以 `main` 上的 `v1.0-before-redesign` 为基线。
-- 当前阶段仅整理文档。经 Marian 确认后，再实施页面改动。合并到 `main` 或部署前须获得 Marian 确认。
-- 提交和推送遵循任务授权。保留已有改动，将凭据、私人资料和 `.DS_Store` 留在 Git 之外。
+- Explore the redesign on `design-exploration`, using the `v1.0-before-redesign` tag on `main` as the baseline.
+- The current phase covers documentation only. Get Marian's approval before implementing page changes, merging into `main`, or deploying.
+- Commit and push only as authorized by the task. Preserve existing changes and keep credentials, private materials, and `.DS_Store` out of Git.
 
-## 站点维护
+## Site Maintenance
 
-- `index.html` 集中维护 HTML、CSS、原生 JavaScript、站点数据与内嵌素材。`.nojekyll` 支持 GitHub Pages 直接提供静态文件。新增站内资源使用相对路径，兼容仓库子路径。
-- 页面实现获确认后，优先复用现有结构、样式变量和渲染逻辑。编辑时避开无关的内嵌图片与地图几何数据。
-- 保留 `#travel-map`、`#interest-timeline` 和 `#personal-life` 的直接访问、刷新及浏览器前进后退行为。调整导航时同步检查页面标题、当前导航项和焦点。
-- 默认英文。同步维护 `.en`、`.zh` 和 `[English, 中文]` 数据，以及适用的标题、替代文本、控件名称和状态提示。切换语言时保持 `lang` 与 `data-language` 一致。
-- 优先使用语义化 HTML，支持键盘、可见焦点和触控。保留旅行地图的标记按钮与文字索引，以及对减少动态效果设置的支持。
-- 地点坐标使用 `[经度, 纬度]`，近似位置使用 `approximate: true`。每个可选国家应关联有效的地区、地图视图和至少一条地点记录。兴趣记录使用数字年份，未知时填 `null`。
-- 以 Marian 提供或确认的信息为准。缺少照片、咖啡店记录或日期时保留空态。只使用获准公开的素材，发布照片前检查隐私和定位元数据。访客主动选择的音频保存在其浏览器中。
+- `index.html` contains the site's HTML, CSS, vanilla JavaScript, data, and embedded assets. `.nojekyll` lets GitHub Pages serve the static files directly. Use relative paths for new local assets so they work under the repository subpath.
+- Once Marian approves page implementation, reuse the existing structure, style variables, and rendering logic wherever possible. Leave unrelated embedded images and map geometry untouched.
+- Preserve direct access, reloads, and browser back and forward navigation for `#travel-map`, `#interest-timeline`, and `#personal-life`. When changing navigation, check the page title, active navigation item, and focus.
+- English is the default language. Keep `.en` and `.zh` content, `[English, Chinese]` data, and any applicable titles, alternative text, control labels, and status messages in sync. Keep `lang` and `data-language` aligned when switching languages.
+- Prefer semantic HTML and support keyboard navigation, visible focus, and touch input. Preserve the travel map's marker buttons and text index, and respect reduced-motion preferences.
+- Use `[longitude, latitude]` for place coordinates and `approximate: true` for approximate locations. Each selectable country must have a valid region, a map view, and at least one place record. Use numeric years for interest entries and `null` when the year is unknown.
+- Rely on information Marian supplies or confirms. Preserve empty states for missing photos, coffee shop entries, or dates. Use only assets cleared for public use, and check photos for privacy concerns and geolocation metadata before publishing. Store audio that visitors select in their own browsers.
 
-## 验证
+## Verification
 
-- 文档改动检查相对链接和事实描述，交付前运行 `git status --short` 和 `git diff --check`，并核对新增文件。
-- 涉及页面时，从仓库根目录运行 `python3 -m http.server 8000 --bind 127.0.0.1`，打开 `http://127.0.0.1:8000/` 做本地验证。
-- 按改动范围检查中英切换、桌面与窄屏、键盘焦点、哈希导航、地图与索引同步、时间轴和空态。涉及素材或播放器时，检查仓库子路径资源地址、灯箱、减少动态效果设置或播放回退。
+- For documentation changes, check relative links and factual claims. Before delivery, run `git status --short` and `git diff --check`, and review any new files.
+- For page changes, run `python3 -m http.server 8000 --bind 127.0.0.1` from the repository root and open `http://127.0.0.1:8000/` to verify locally.
+- As relevant to the change, check English and Chinese language switching, desktop and narrow layouts, keyboard focus, hash navigation, map and text index synchronization, the interest timeline, and empty states. For asset or player changes, check asset URLs under the repository subpath, the lightbox, reduced-motion preferences, or playback fallback as applicable.
